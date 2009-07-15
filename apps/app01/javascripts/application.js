@@ -117,6 +117,8 @@ PluginManager.prototype.applyPlugins = function() {
                 odlib.login(function(xhr, textStatus) {
                     plugin.handler.call(plugin);
                 });
+            } else {
+                plugin.handler.call(plugin);
             }
         }
 
