@@ -8,7 +8,8 @@
     // check if we need to add any plugin code based on the URL we're at
     // this ensures we don't load any extra code unitl we need to (minimal performance impact)
     var invokeOnURLPatterns = [
-        /ContactCallInsert/ig
+        /ContactCallInsert/ig,
+        /ContactCallDetail/ig
     ];
     
     var pathname = window.location.pathname;
