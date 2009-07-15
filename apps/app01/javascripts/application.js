@@ -69,6 +69,32 @@ var copyPreviousObjectiveHandler = function() {
     
 };
 
+var augmentCallDetailsEntry = function() {
+	var row =  "<tr width='100%'>";
+	row += "<td>Product: <select><option></option><option>Singulair</option><option>Hyzaar</option></td>";
+	row += "<td>Priority: <input type='text' size='1'></input></td>";
+	row += "<td>Indication: <select><option></option><option>Allergy</option><option>Asthma</option></td>";
+	row += "<td>Issues: <select><option></option><option>Side effects</option><option>Efficacy</option></td>";
+	row += "<td><input type='button' name='delete' value='delete' onclick='jQuery(this).parent().parent().remove()'></input></td>";
+	row += "</tr>";
+
+	var html = "<div>";
+	html += "<table id='mrk_details'>";
+	html += row;
+	html += "</table>";
+	html += "</div>";
+
+	var e = jQuery("[class='buttonChildTitleBarTD']").filter("[id^='CallsProdDetail']").get(0);
+	e.onclick = function() {};
+	jQuery("[class='buttonChildTitleBarTD']").filter("[id^='CallsProdDetail']").click(function() {
+		if ( jQuery("#mrk_details").size() === 0 ) {
+			jQuery("#CallsProdDetailChildListDiv").next().replaceWith(html);
+		} else {
+			jQuery("#mrk_details").append(row);
+		}
+	});    
+};
+
 //***************************************************************************
 // Plugin Manager
 //***************************************************************************
@@ -107,6 +133,12 @@ var pluginsDefinitions = [
         invokeOnPattern: /ContactCallInsert/ig,
         handler: copyPreviousObjectiveHandler,
         requiresLogin: true
+    },
+    {
+        name: 'Augment Call Details Entry',
+        invokeOnPattern: /ContactCallDetail/ig,
+        handler: augmentCallDetailsEntry,
+        requiresLogin: false
     }
 ];
 
